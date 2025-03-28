@@ -63,6 +63,12 @@ def edit_inv():
 
 def view_inv():
     print("\n--- Current Inventory ---")
+    # Checks if inventory is empty
+    if not inv:
+        print("Inventory is empty.")
+        return
+    for item in inv:
+        print(f"Name: {item['name']}, Quantity: {item['quantity']}")
 
 def main():
     while True:
