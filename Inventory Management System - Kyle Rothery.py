@@ -16,12 +16,17 @@ def display_menu():
 def add_inv():
     print("\n--- Add an Item ---")
     name = input("Enter the name of the item: ").strip()
-    qty_input = input("Enter the quantity: ").strip()
-    try:
-        qty = int(qty_input)
-    except ValueError:
-        print("Invalid quantity. Please enter a valid number.")
-        return
+
+    # Loop until the user provides a valid quantity
+    while True:
+        qty_input = input("Enter the quantity: ").strip()
+        try:
+            qty = int(qty_input)
+            # Exit loop if an integer is entered
+            break
+        except ValueError:
+            print("Invalid quantity. Please enter a valid number.")
+    
     # Create a new item dictionary and add it to the inventory
     item = {"name": name, "quantity": qty}
     inv.append(item)
@@ -34,22 +39,24 @@ def edit_inv():
         print("Inventory is empty. Nothing to edit.")
         return
     view_inv()
-    edit_choice = input("Enter the item number to edit: ").strip()
-    try:
-        # Choice that user enters is subtracted by 1 as the list starts at 0
-        edit_choice = int(edit_choice) - 1
-        if edit_choice < 0 or edit_choice >= len(inv):
-            print("Item number out of range.")
-            return
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
-        return
+    while True:
+        edit_choice = input("Enter the item number to edit: ").strip()
+        try:
+            # Choice that user enters is subtracted by 1 as the list starts at 0
+            edit_choice = int(edit_choice) - 1
+            if edit_choice < 0 or edit_choice >= len(inv):
+                print("Item number out of range.")
+            else:
+                # Exit loop if input is appropriate
+                break
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
     # Retrieves the item from the inventory
     item = inv[edit_choice]
     print(f"Editing item: {item['name']} (Current Quantity: {item['quantity']})")
     new_name = input("Enter new name (leave blank to keep current): ").strip()
     new_qty = input("Enter new quantity (leave blank to keep current): ").strip()
-    # if loop necessary so that user can keep the same if they wish
+    # if statement necessary so that user can keep the same if they wish
     if new_name:
         item["name"] = new_name
     if new_qty:
@@ -78,14 +85,17 @@ def remove_inv():
         print("Inventory is empty. Nothing to remove.")
         return
     view_inv()
-    remove_choice = input("Enter the item number to remove: ").strip()
-    # try catch prevents invalid quantity being entered
-    try:
-        remove_choice = int(remove_choice) - 1
-        if remove_choice < 0 or remove_choice >= len(inv):
-            print("Item number out of range.")
-            return
-    except ValueError:
+    while True:
+        remove_choice = input("Enter the item number to remove: ").strip()
+        # try catch prevents invalid quantity being entered
+        try:
+            remove_choice = int(remove_choice) - 1
+            if remove_choice < 0 or remove_choice >= len(inv):
+                print("Item number out of range.")
+            else:
+                # Exit loop if input is appropriate
+                break
+        except ValueError:
             print("Invalid input. Please enter a valid number.")
             return
     # .pop removes item from inv list
