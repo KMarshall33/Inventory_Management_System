@@ -70,6 +70,27 @@ def view_inv():
     for item in inv:
         print(f"Name: {item['name']}, Quantity: {item['quantity']}")
 
+def remove_inv():
+    print("\n--- Remove an Item ---")
+    # Checks if inventory is empty
+    if not inv:
+        print("Inventory is empty. Nothing to remove.")
+        return
+    view_inv()
+    remove_choice = input("Enter the item number to remove: ").strip()
+    # try catch prevents invalid quantity being entered
+    try:
+        remove_choice = int(remove_choice) - 1
+        if remove_choice < 0 or remove_choice >= len(inv):
+            print("Item number out of range.")
+            return
+    except ValueError:
+            print("Invalid input. Please enter a valid number.")
+            return
+    # .pop removes item from inv list
+    removed_item = inv.pop(remove_choice)
+    print(f"Item '{removed_item['name']}' removed successfully.")
+
 def main():
     while True:
         choice = display_menu()
