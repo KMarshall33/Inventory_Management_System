@@ -67,8 +67,9 @@ def view_inv():
     if not inv:
         print("Inventory is empty.")
         return
-    for item in inv:
-        print(f"Name: {item['name']}, Quantity: {item['quantity']}")
+    # Lists each item in the inv in a new class that starts from 1 for display purposes
+    for list, item in enumerate(inv, start=1):
+        print(f"{list}. Name: {item['name']}, Quantity: {item['quantity']}")
 
 def remove_inv():
     print("\n--- Remove an Item ---")
@@ -101,7 +102,7 @@ def main():
         elif choice == '3':
             view_inv()
         elif choice == '4':
-            print("WORK IN PROGRESS")
+            remove_inv()
         elif choice == '5':
             print("Exiting Inventory Management System.")
             sys.exit(0)
